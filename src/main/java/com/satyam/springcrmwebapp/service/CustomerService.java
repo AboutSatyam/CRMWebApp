@@ -2,6 +2,7 @@ package com.satyam.springcrmwebapp.service;
 
 import com.satyam.springcrmwebapp.model.Customer;
 import com.satyam.springcrmwebapp.repo.ICustomerReop;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +26,20 @@ public class CustomerService implements ICustomerService {
     @Override
     public void registerCustomer(Customer customer) {
         repo.save(customer);
+    }
+
+    @Override
+    public Customer fetchCxById(Integer id) {
+        return repo.findById(id).orElse(null);
+    }
+
+    @Override
+    public void updateCustomer(Customer customer) {
+        repo.save(customer);
+    }
+
+    @Override
+    public void deleteCxRecord(Integer id) {
+        repo.deleteById(id);
     }
 }
