@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -21,7 +23,20 @@ public class CustomerController {
     @GetMapping("/cxinfo")
     public String getAllCxData(Model model) {
         List<Customer> cxList = service.getCustomerInfo();
-        model.addAttribute("customer",cxList);
+        model.addAttribute("customer", cxList);
+        cxList.forEach(c -> System.out.println(c));
+        return "customerinfo";
+    }
+
+    @GetMapping("/showForm")
+    public String getForm() {
+        return "showform";
+    }
+
+    @PostMapping("/registerCustomer")
+    public String registerCustomer(@ModelAttribute("customer") Customer customer, Model model) {
+        List<Customer> cxList = service.getCustomerInfo();
+        model.addAttribute("customer", cxList);
         cxList.forEach(c -> System.out.println(c));
         return "customerinfo";
     }
